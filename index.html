@@ -3,236 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biology Mastery Ritual 🌳</title>
+    <title>Bio Ritual 🌳</title>
     <style>
-        :root {
-            --primary-green: #4CAF50;
-            --dark-green: #2D5A27;
-            --soft-yellow: #FFFDE7;
-            --accent-yellow: #FBC02D;
-            --bg-color: #FDFDFB;
-            --text-color: #333;
-            --border-color: #E0E0E0;
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            color: var(--dark-green);
-            margin: 0;
-            font-size: 2.2rem;
-            letter-spacing: 1px;
-        }
-
-        .ritual-icon { color: var(--accent-yellow); }
-
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-top: 8px solid var(--primary-green);
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 1000px;
-        }
-
-        th {
-            background-color: var(--primary-green);
-            color: white;
-            padding: 15px 10px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        th.summary-header {
-            background-color: var(--dark-green);
-        }
-
-        td {
-            padding: 12px 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        tr:hover {
-            background-color: var(--soft-yellow);
-        }
-
-        .ch-num {
-            font-weight: 700;
-            color: var(--dark-green);
-            text-align: center;
-        }
-
-        .ch-title-input {
-            width: 90%;
-            border: 1px solid transparent;
-            border-bottom: 1px dashed var(--primary-green);
-            padding: 6px;
-            font-size: 0.9rem;
-            background: transparent;
-        }
-
-        .ch-title-input:focus {
-            outline: none;
-            border-bottom: 1px solid var(--dark-green);
-            background: white;
-        }
-
-        .status-cell {
-            text-align: center;
-            border-right: 1px solid #f0f0f0;
-        }
-
-        .date-input {
-            display: block;
-            margin: 5px auto 0;
-            font-size: 0.7rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            color: #666;
-        }
-
-        .summary-box {
-            width: 95%;
-            height: 45px;
-            font-size: 0.8rem;
-            border: 1px solid #eee;
-            border-radius: 5px;
-            padding: 5px;
-            resize: vertical;
-            font-family: inherit;
-        }
-
-        input[type="checkbox"] {
-            transform: scale(1.3);
-            accent-color: var(--primary-green);
-            cursor: pointer;
-        }
-
-        /* Progress Bar Simple */
-        .progress-container {
-            width: 100%;
-            max-width: 1400px;
-            background: #eee;
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
+        :root { --apple: #88D66C; --lemon: #F4E06D; --bg: #FCFCFA; }
+        body { font-family: sans-serif; background: var(--bg); padding: 15px; color: #333; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .backup-section { background: #eee; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; }
+        .container { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        th { padding: 10px; font-size: 12px; }
+        .col-study { background: var(--lemon); }
+        .col-rev { background: var(--apple); }
+        td { padding: 8px; border-bottom: 1px solid #eee; text-align: center; }
+        .ch-input { width: 90%; border: none; border-bottom: 1px solid #ccc; font-size: 14px; }
+        .date-input { display: block; width: 85px; margin: 4px auto; font-size: 11px; }
+        textarea { width: 90%; height: 40px; font-size: 12px; border: 1px solid #eee; }
+        button { padding: 8px 12px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; background: white; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Biology Mastery Ritual <span class="ritual-icon">🌳</span></h1>
-        <p style="color: #888;">Complete the journey from Chapter 1 to 38</p>
-    </header>
+    <div class="header">
+        <h1>Biology Ritual 🌳</h1>
+    </div>
+
+    <div class="backup-section">
+        <strong>Manual Sync:</strong> 
+        <button onclick="exportData()">Copy Backup Code</button>
+        <button onclick="importData()">Import Code</button>
+        <p style="margin-top:5px; color:#666;">* Click Copy, then paste the code to your other device.</p>
+    </div>
 
     <div class="container">
         <table>
             <thead>
                 <tr>
-                    <th style="width: 50px;">Ch.</th>
-                    <th style="width: 200px;">Chapter Title</th>
-                    <th>Study</th>
-                    <th>Review 1</th>
-                    <th>Review 2</th>
-                    <th class="summary-header">Summary I</th>
-                    <th>Review 3</th>
-                    <th class="summary-header">Summary II</th>
-                    <th>Review 4</th>
+                    <th>#</th>
+                    <th style="width:150px">Title</th>
+                    <th class="col-study">Study</th>
+                    <th class="col-rev">R1</th>
+                    <th class="col-rev">R2</th>
+                    <th style="background:#FFFBEB">Sum I</th>
+                    <th class="col-rev">R3</th>
+                    <th style="background:#F0F9ED">Sum II</th>
+                    <th class="col-rev">R4</th>
                 </tr>
             </thead>
-            <tbody id="ritual-body">
-                </tbody>
+            <tbody id="ritual-body"></tbody>
         </table>
     </div>
 
     <script>
         const body = document.getElementById('ritual-body');
-        const TOTAL_CHAPTERS = 38;
-
-        for (let i = 1; i <= TOTAL_CHAPTERS; i++) {
+        for (let i = 1; i <= 38; i++) {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td class="ch-num">${i}</td>
-                <td><input type="text" class="ch-title-input" placeholder="Click to name..." id="title-${i}"></td>
-                
-                <td class="status-cell">
-                    <input type="checkbox" id="chk-s-${i}">
-                    <input type="date" class="date-input" id="dt-s-${i}">
-                </td>
-                
-                <td class="status-cell">
-                    <input type="checkbox" id="chk-r1-${i}">
-                    <input type="date" class="date-input" id="dt-r1-${i}">
-                </td>
-                
-                <td class="status-cell">
-                    <input type="checkbox" id="chk-r2-${i}">
-                    <input type="date" class="date-input" id="dt-r2-${i}">
-                </td>
-                
-                <td><textarea class="summary-box" id="sum1-${i}" placeholder="Initial notes..."></textarea></td>
-                
-                <td class="status-cell">
-                    <input type="checkbox" id="chk-r3-${i}">
-                    <input type="date" class="date-input" id="dt-r3-${i}">
-                </td>
-                
-                <td><textarea class="summary-box" id="sum2-${i}" placeholder="Advanced notes..."></textarea></td>
-                
-                <td class="status-cell">
-                    <input type="checkbox" id="chk-r4-${i}">
-                    <input type="date" class="date-input" id="dt-r4-${i}">
-                </td>
+                <td>${i}</td>
+                <td><input type="text" class="ch-input" id="t-${i}"></td>
+                <td><input type="checkbox" id="cs-${i}"><input type="date" class="date-input" id="ds-${i}"></td>
+                <td><input type="checkbox" id="cr1-${i}"><input type="date" class="date-input" id="dr1-${i}"></td>
+                <td><input type="checkbox" id="cr2-${i}"><input type="date" class="date-input" id="dr2-${i}"></td>
+                <td><textarea id="s1-${i}"></textarea></td>
+                <td><input type="checkbox" id="cr3-${i}"><input type="date" class="date-input" id="dr3-${i}"></td>
+                <td><textarea id="s2-${i}"></textarea></td>
+                <td><input type="checkbox" id="cr4-${i}"><input type="date" class="date-input" id="dr4-${i}"></td>
             `;
             body.appendChild(row);
         }
 
-        // Auto-save logic
-        const allInputs = document.querySelectorAll('input, textarea');
-        allInputs.forEach(el => {
+        // 自動存檔到當前設備
+        document.querySelectorAll('input, textarea').forEach(el => {
             el.addEventListener('input', () => {
-                const value = el.type === 'checkbox' ? el.checked : el.value;
-                localStorage.setItem('bio-ritual-' + el.id, value);
+                const val = el.type === 'checkbox' ? el.checked : el.value;
+                localStorage.setItem('bio-v2-' + el.id, val);
             });
         });
 
-        // Load data on start
+        // 載入當前設備存檔
         window.addEventListener('load', () => {
-            allInputs.forEach(el => {
-                const saved = localStorage.getItem('bio-ritual-' + el.id);
+            document.querySelectorAll('input, textarea').forEach(el => {
+                const saved = localStorage.getItem('bio-v2-' + el.id);
                 if (saved !== null) {
-                    if (el.type === 'checkbox') {
-                        el.checked = (saved === 'true');
-                    } else {
-                        el.value = saved;
-                    }
+                    if (el.type === 'checkbox') el.checked = (saved === 'true');
+                    else el.value = saved;
                 }
             });
         });
+
+        // 匯出功能
+        function exportData() {
+            let data = {};
+            for(let i=0; i<localStorage.length; i++){
+                let key = localStorage.key(i);
+                if(key.startsWith('bio-v2-')) data[key] = localStorage.getItem(key);
+            }
+            const code = btoa(JSON.stringify(data));
+            navigator.clipboard.writeText(code);
+            alert("Backup code copied to clipboard!");
+        }
+
+        // 匯入功能
+        function importData() {
+            const code = prompt("Paste your backup code here:");
+            if (code) {
+                try {
+                    const data = JSON.parse(atob(code));
+                    Object.keys(data).forEach(key => localStorage.setItem(key, data[key]));
+                    location.reload();
+                } catch(e) { alert("Invalid code!"); }
+            }
+        }
     </script>
 </body>
 </html>
